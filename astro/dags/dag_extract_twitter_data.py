@@ -19,7 +19,7 @@ with DAG(
         task_id="extract_twitter_data",
         query=query,
         file_path=join(
-            "datalake/bronze/twitter_alura",
+            "/workspace/twitter_api_data_consumption/datalake/bronze/bronze/twitter_alura",
             "extract_data_{{ ds_nodash }}",
             "alura_{{ ds_nodash }}.json"
         ),
@@ -35,20 +35,22 @@ with DAG(
         ),
     )
 
-    transform_twitter_data = SparkSubmitOperator(
-        task_id="transform_twitter_data",
-        application=(
-            "spark/transformation.py"
-        ),
-        name="twitter_transformation",
-        application_args=[
-            "--src",
-            "datalake/bronze/twitter_alura/extract_data_{{ ds_nodash }}",
-            "--dest",
-            "datalake/silver/twitter_alura",
-            "--process-date",
-            "{{ ds_nodash }}"
-        ]
-    )
+    # transform_twitter_data = SparkSubmitOperator(
+    #     task_id="transform_twitter_data",
+    #     application=(
+    #         "spark/transformation.py"
+    #     ),
+    #     name="twitter_transformation",
+    #     application_args=[
+    #         "--src",
+    #         "datalake/bronze/twitter_alura/extract_data_{{ ds_nodash }}",
+    #         "--dest",
+    #         "datalake/silver/twitter_alura",
+    #         "--process-date",
+    #         "{{ ds_nodash }}"
+    #     ]
+    # )
 
-    extract_twitter_data >> transform_twitter_data
+    # extract_twitter_data >> transform_twitter_data
+
+    extract_twitter_data
