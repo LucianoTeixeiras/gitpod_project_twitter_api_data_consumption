@@ -19,12 +19,39 @@ services:
     volumes:
       - minio_storage:/data
     environment:
-      MINIO_ROOT_USER: masoud
-      MINIO_ROOT_PASSWORD: Strong#Pass#2022
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: Lt207603
     command: server --console-address ":9001" /data
 
 volumes:
   minio_storage: {}
 """
 # Run docker-compose
-docker-compose --project-name standalone_minio -f minio-compose.yml up
+docker-compose --project-name minio_datalake -f minio-compose.yml up -d
+
+# Cleaning up
+
+docker-compose down --volumes --rmi all
+
+docker-compose down --volumes --remove-orphans
+
+# Docker Delete Containerid
+docker images
+
+docker image rm 46b3c561f76f
+
+docker image rm -f 46b3c561f76f
+
+# Docker Delete Containerid
+
+docker stop 9d19aef4031d
+
+docker rmi 9d19aef4031d
+
+docker rmi -f 9d19aef4031d
+
+# Docker IP
+
+sudo docker inspect -f \
+'{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' \
+b1480a450dd4
