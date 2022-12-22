@@ -10,7 +10,7 @@ timestamp_format = "%Y-%m-%dT%H:%M:%S.00Z"
 query="AluraOnline"
 
 with DAG(
-    dag_id="dag_extract_and_process_twitter_data",
+    dag_id="dag_extract_twitter_data",
     start_date=days_ago(6),
     schedule_interval="@daily"
 ) as dag:
