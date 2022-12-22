@@ -17,14 +17,14 @@ services:
       - "9000:9000"
       - "9001:9001"
     volumes:
-      - minio_storage:/data
+      - storage:/data
     environment:
       MINIO_ROOT_USER: minio
       MINIO_ROOT_PASSWORD: Lt207603
     command: server --console-address ":9001" /data
 
 volumes:
-  minio_storage: {}
+  storage: {}
 """
 # Run docker-compose
 docker-compose --project-name minio_datalake -f minio-compose.yml up -d
